@@ -1,0 +1,159 @@
+# Doctests of dunc-conway.py
+# Adapted from bryce_gol.txt
+
+>>> from dunc_conway import *
+
+>>> dead_cell = "0"
+>>> live_cell = "1"
+>>> matrix = [
+... [1,1,1,1,1],
+... [1,0,0,0,1],
+... [1,0,0,0,1],
+... [1,0,0,0,1],
+... [1,1,1,1,1]
+... ]
+>>> life_game = life_game_from_matrix(matrix,dead_cell,live_cell)
+>>> print(life_game)
+11111
+10001
+10001
+10001
+11111
+
+>>> print(life_game.alive_count)
+16
+
+>>> life_game.next()
+>>> print(life_game)
+11111
+10101
+11011
+10101
+11111
+
+>>> life_game.next()
+>>> print(life_game)
+10101
+00000
+10001
+00000
+10101
+
+>>> life_game.next()
+>>> print(life_game)
+00000
+01010
+00000
+01010
+00000
+
+>>> print(life_game.alive_count)
+4
+
+>>> print(life_game.get_is_static())
+False
+
+>>> life_game.next()
+>>> print(life_game)
+00000
+00000
+00000
+00000
+00000
+
+>>> print(life_game.alive_count)
+0
+
+>>> print(life_game.get_is_static())
+True
+
+
+# check matrix validation
+>>> matrix = None
+>>> life_game = life_game_from_matrix(matrix,dead_cell,live_cell)
+Traceback (most recent call last):
+...
+ValueError: invalid matrix (matrix not defined)
+
+>>> matrix = 1
+>>> life_game = life_game_from_matrix(matrix,dead_cell,live_cell)
+Traceback (most recent call last):
+...
+ValueError: invalid matrix (expecting list of lists)
+
+>>> matrix = []
+>>> life_game = life_game_from_matrix(matrix,dead_cell,live_cell)
+Traceback (most recent call last):
+...
+ValueError: invalid matrix (expecting list of lists)
+
+>>> matrix = [[],[]]
+>>> life_game = life_game_from_matrix(matrix,dead_cell,live_cell)
+Traceback (most recent call last):
+...
+ValueError: invalid matrix (empty columns)
+
+>>> matrix = [1,0]
+>>> life_game = life_game_from_matrix(matrix,dead_cell,live_cell)
+Traceback (most recent call last):
+...
+ValueError: invalid matrix (expecting list of lists)
+
+>>> matrix = [[1,0],[1,0,1]]
+>>> life_game = life_game_from_matrix(matrix,dead_cell,live_cell)
+Traceback (most recent call last):
+...
+ValueError: invalid matrix (inconsistent row lengths)
+
+>>> matrix = [[1,0,1],[1,2,1]]
+>>> life_game = life_game_from_matrix(matrix,dead_cell,live_cell) #doctest: +ELLIPSIS
+Traceback (most recent call last):
+...
+ValueError: invalid matrix ...
+
+>>> matrix = [[1,0,1],[1,0.5,1]]
+>>> life_game = life_game_from_matrix(matrix,dead_cell,live_cell) #doctest: +ELLIPSIS
+Traceback (most recent call last):
+...
+ValueError: invalid matrix ...
+
+
+# test initialization of a random set of living cells
+>>> rows = 5
+>>> cols = 5
+>>> grid = Grid(rows,cols)
+>>> print(grid.get_alive_count())
+0
+>>> grid.set_alive_random_cells(-3)
+>>> print(grid.get_alive_count())
+0
+>>> grid.set_alive_random_cells(10)
+>>> print(grid.get_alive_count())
+10
+>>> grid = Grid(rows,cols)
+>>> grid.set_alive_random_cells(50)
+>>> print(grid.get_alive_count())
+25
+
+
+# test LifeGame initialization via constructor
+>>> alive_count = 10
+>>> life_game = LifeGame(rows,cols,alive_count)
+>>> print(life_game.alive_count)
+10
+>>> alive_count = get_default_living(rows,cols)
+>>> life_game = LifeGame(rows,cols,alive_count)
+>>> print(life_game.alive_count > 0)
+True
+>>> print(life_game.alive_count == alive_count)
+True
+
+# light test of method print_sate
+>>> cycle_number = 0
+>>> max_cycles = 20
+>>> print_state(life_game, cycle_number, max_cycles) #doctest: +ELLIPSIS
+cycle 0 : 20
+...
+alive: ...
+static: False
+<BLANKLINE>
