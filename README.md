@@ -1,6 +1,7 @@
 # conway
 Conway "Game of Life."  Learning Python.
 
+```
 $ ./dunc_conway.py -h
 usage: dunc_conway.py [-h] [-r ROWS] [-c COLS] [-l LIVING] [-m MAX] [-t TIME]
 
@@ -15,3 +16,39 @@ optional arguments:
 
 $ python3 -m doctest -v dunc_conway.txt
 . . .
+
+$ ./dunc_conway.py
+cycle 0 : 200
+     *           * *     * *     *           * *   *       *
+     * * * *       *                         *       *      
+             *   *   *           *                 *        
+   *       *                         *   *               *  
+                   *                 *         *           *
+ * *                 * *   *             *         *   *    
+                             * *       *     *              
+     * *       * * *                                 *     *
+   * *       *             *         *     *     *         *
+         *     *           *               *         *      
+             *     * *   *       * *     *   * *            
+     *   * *       *       *         *         *            
+ *       * *                     *       *                 *
+             *                     *     *                 *
+         *   *   *                       * *                
+     *     *                         * *   *       *       *
+     * *       *   *   *     *   *       *             * * *
+               *   *   *         * *     *     * *     *    
+           *   *           *   * *         * *              
+     *             * * *   *   *           * * *     *     *
+ *       *         *     *       *       *       *          
+             *     *           *   *                        
+     * *   * * *       *   *   *       *   *         *     *
+   *           *   *   *       *     *   *   *             *
+   *                   *           *       * *       *   *  
+ * *     *     *   *       * * * *       *   *           *  
+     * *         *             * *     *           *   * *  
+ *   * *           * *           *       *     *            
+ *       * *           *         *   *   *   *         *   *
+ *         *   *               *     *       * *       *    
+alive: 225
+static: False
+```
